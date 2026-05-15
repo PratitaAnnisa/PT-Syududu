@@ -63,9 +63,35 @@ int main(){
         cout << "||     4. Hapus Data Karyawan                                     ||\n";
         cout << "||     5. Undo Aksi                                               ||\n";
         cout << "||     6. Tampilkan Antrian Cuti Karyawan                         ||\n";
-        cout << "||     7. Keluar                                                  ||\n";
+        cout << "||     0. Keluar                                                  ||\n";
         cout << "====================================================================\n";
         cout << "Pilih menu: ";
         cin >> menu;
+
+        switch(menu){
+            case 1:
+                //tambahDataKaryawan();
+                break;
+            case 2:
+                //tampilkanDataKaryawan(root);
+                break;
+            case 3:
+                //pengajuanCuti();
+                break;
+            case 4:
+                //hapusDataKaryawan();
+                break;
+            case 5:
+                //undoAksi();
+                break;
+            case 6:
+                //tampilkanAntrianCuti();
+                break;
+            case 0:
+                cout << "Program Keluar\nData Telah Tersimpan" << endl;
+                break;
+            default:
+                cout << "Opsi menu tidak valid." << endl; 
+        }
     } while(lanjut == "Y" || lanjut == "y");
 }
