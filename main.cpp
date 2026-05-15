@@ -49,7 +49,23 @@ NodeQueue* depan = nullptr;
 NodeQueue* belakang = nullptr;
 NodeStack* top = nullptr;
 
-
 int main(){
-    cout << "Ya Allah, baru juga submit satu, nongol baru lagi\n";   
+    int menu;
+    string lanjut;
+    do{
+        system("cls");
+        cout << "====================================================================\n";
+        cout << "||         Sistem Pengelolaan Cuti Karyawan -PT. Syududu          ||\n";
+        cout << "====================================================================\n";
+        cout << "||     1. Tambah Data Karyawan                                    ||\n";
+        cout << "||     2. Tampilkan Data Karyawan                                 ||\n";
+        cout << "||     3. Pengajuan Cuti                                          ||\n";
+        cout << "||     4. Hapus Data Karyawan                                     ||\n";
+        cout << "||     5. Undo Aksi                                               ||\n";
+        cout << "||     6. Tampilkan Antrian Cuti Karyawan                         ||\n";
+        cout << "||     7. Keluar                                                  ||\n";
+        cout << "====================================================================\n";
+        cout << "Pilih menu: ";
+        cin >> menu;
+    } while(lanjut == "Y" || lanjut == "y");
 }
