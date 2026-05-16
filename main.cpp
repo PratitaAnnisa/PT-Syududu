@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 struct NodePTB{
@@ -51,7 +52,7 @@ NodeStack* top = nullptr;
 
 NodePTB* insert(NodePTB* root, int id, string x, string div){
     if(root == nullptr){
-        return new NodePTB(id, x, div);
+        return new NodePTB(id, x, div, false);
     }
     if(id < root->nip){
         root->kiri = insert(root->kiri, id, x, div);
@@ -170,6 +171,115 @@ void tambahDataKaryawan(){
     }
 }
 
+void tampilkanDataKaryawan(NodePTB* root){
+    system("cls");
+    cout << "====================================================================\n";
+    cout << "||\t\tData Karyawan PT. Syududu         ||\n";
+    cout << "====================================================================\n";
+    cout << left << setw(5) << "No" << setw(15) << "NIP" << setw(25) << "Nama" << setw(20) << "Divisi" << setw(15) << "Status Cuti" << endl;
+    cout << "---------------------------------------------------------------------\n";
+
+    if(root == nullptr){
+        cout << "Belum ada data karyawan.\n";
+    } else{
+        int no = 1;
+        inOrder(root, no);
+    }
+
+    cout << "=====================================================================\n";
+}
+
+void pengajuanCuti(){
+    system("cls");
+    int id;
+    cout << "====================================================================\n";
+    cout << "||\t\tPengajuan Cuti Karyawan         ||\n";
+    cout << "====================================================================\n";
+    cout << "Masukkan NIP karyawan yang ingin mengajukan cuti: ";
+    cin >> id;
+
+    NodePTB* karyawan = search(root, id);
+    if(karyawan != nullptr){
+        if(karyawan->cuti){
+            cout << "Karyawan dengan NIP " << id << " sudah mengajukan cuti sebelumnya." << endl;
+        } else {
+            karyawan->cuti = true;
+            enQueue(id, karyawan->nama);
+            push("Pengajuan Cuti", id, karyawan->nama);
+            cout << "Pengajuan cuti berhasil\n"; 
+        }
+    } else {
+        cout << "Karyawan dengan NIP " << id << " tidak ditemukan." << endl;
+    }
+}
+
+void hapusDataKaryawan(){
+    system("cls");
+    cout << "====================================================================\n";
+    cout << "||\t\tHapus Data Karyawan         ||\n";
+    cout << "====================================================================\n";
+    int id;
+    cout << "Masukkan NIP karyawan yang ingin dihapus: ";
+    cin >> id;
+
+    if(search(root, id) == nullptr){
+        cout << "NIP karyawan tidak ditemukan." << endl;
+        return;
+    }
+
+    root = hapus(root, id);
+    cout << "Data karyawan dengan NIP " << id << " berhasil dihapus." << endl;
+    push("Hapus", id, "Data Karyawan");
+}
+
+void undoAksi(){
+    system("cls");
+    cout << "====================================================================\n";
+    cout << "||\t\tUndo Aksi Terakhir         ||\n";
+    cout << "====================================================================\n";
+
+    if(top == nullptr){
+        cout << "Tidak ada aksi untuk di-undo.\n";
+        return;
+    }
+
+    string aksi = top->aksi;
+    int id = top->nip;
+    string nama = top->nama;
+
+    NodePTB* karyawan = search(root, id);
+
+    if(aksi == "AJUKAN"){
+        if(karyawan != nullptr) karyawan->cuti = false;
+        cout << "Undo: Status cuti karyawan dibatalkan.\n";
+    } else if(aksi == "SELESAI"){
+        if(karyawan != nullptr) karyawan->cuti = true;
+        cout << "Undo: Status cuti karyawan dikembalikan.\n";
+    }
+
+    pop();
+}
+
+void tampilkanAntrianCuti(){
+    system("cls");
+    cout << "====================================================================\n";
+    cout << "||\t\tAntrian Cuti Karyawan         ||\n";
+    cout << "====================================================================\n";
+
+    if(depan == nullptr){
+        cout << "Tidak ada antrian pengjuan cuti.\n";
+        return;
+    }
+
+    NodeQueue* current = depan;
+    int no = 1;
+    while(current != nullptr){
+        cout << "||     " << no++ << ". " << current->nip << " - " << current->nama << endl;
+        current = current->next;
+    }
+    cout << "====================================================================\n";
+}
+
 int main(){
     int menu;
     string lanjut;
@@ -194,23 +304,23 @@ int main(){
                 tambahDataKaryawan();
                 break;
             case 2:
-                //tampilkanDataKaryawan(root);
+                tampilkanDataKaryawan(root);
                 break;
             case 3:
-                //pengajuanCuti();
+                pengajuanCuti();
                 break;
             case 4:
-                //hapusDataKaryawan();
+                hapusDataKaryawan();
                 break;
             case 5:
-                //undoAksi();
+                undoAksi();
                 break;
             case 6:
-                //tampilkanAntrianCuti();
+                tampilkanAntrianCuti();
                 break;
             case 0:
                 cout << "Program Keluar\nData Telah Tersimpan" << endl;
-                break;
+                return 0;
             default:
                 cout << "Opsi menu tidak valid." << endl; 
         }
