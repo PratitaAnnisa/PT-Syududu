@@ -103,14 +103,14 @@ NodePTB* hapus(NodePTB* root, int id){
     return root;
 }
 
-void inOrder();
-void enQueue();
+void inOrder(NodePTB* root, int& no);
+void enQueue(int id, string x);
 void deQueue();
-void push();
+void push(string aksi, int id, string x);
 void pop();
 void tambahDataKaryawan();
-void tampilkanDataKaryawan();
-void pegajuanCuti();
+void tampilkanDataKaryawan(NodePTB* root);
+void pengajuanCuti();
 void hapusDataKaryawan();
 void undoAksi();
 void tampilkanAntrianCuti();
