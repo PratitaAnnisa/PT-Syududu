@@ -103,6 +103,65 @@ NodePTB* hapus(NodePTB* root, int id){
     return root;
 }
 
+void inOrder();
+void enQueue();
+void deQueue();
+void push();
+void pop();
+void tambahDataKaryawan();
+void tampilkanDataKaryawan();
+void pegajuanCuti();
+void hapusDataKaryawan();
+void undoAksi();
+void tampilkanAntrianCuti();
+
+int main(){
+    int menu;
+    string lanjut;
+    do{
+        system("cls");
+        cout << "====================================================================\n";
+        cout << "||         Sistem Pengelolaan Cuti Karyawan -PT. Syududu          ||\n";
+        cout << "====================================================================\n";
+        cout << "||     1. Tambah Data Karyawan                                    ||\n";
+        cout << "||     2. Tampilkan Data Karyawan                                 ||\n";
+        cout << "||     3. Pengajuan Cuti                                          ||\n";
+        cout << "||     4. Hapus Data Karyawan                                     ||\n";
+        cout << "||     5. Undo Aksi                                               ||\n";
+        cout << "||     6. Tampilkan Antrian Cuti Karyawan                         ||\n";
+        cout << "||     0. Keluar                                                  ||\n";
+        cout << "====================================================================\n";
+        cout << "Pilih menu: ";
+        cin >> menu;
+
+        switch(menu){
+            case 1:
+                tambahDataKaryawan();
+                break;
+            case 2:
+                tampilkanDataKaryawan(root);
+                break;
+            case 3:
+                pengajuanCuti();
+                break;
+            case 4:
+                hapusDataKaryawan();
+                break;
+            case 5:
+                undoAksi();
+                break;
+            case 6:
+                tampilkanAntrianCuti();
+                break;
+            case 0:
+                cout << "Program Keluar\nData Telah Tersimpan" << endl;
+                return 0;
+            default:
+                cout << "Opsi menu tidak valid." << endl; 
+        }
+    } while(lanjut == "Y" || lanjut == "y");
+}
+
 void inOrder(NodePTB* root, int& no){
     if(root != nullptr){
         inOrder(root->kiri, no);
@@ -278,51 +337,4 @@ void tampilkanAntrianCuti(){
         current = current->next;
     }
     cout << "====================================================================\n";
-}
-
-int main(){
-    int menu;
-    string lanjut;
-    do{
-        system("cls");
-        cout << "====================================================================\n";
-        cout << "||         Sistem Pengelolaan Cuti Karyawan -PT. Syududu          ||\n";
-        cout << "====================================================================\n";
-        cout << "||     1. Tambah Data Karyawan                                    ||\n";
-        cout << "||     2. Tampilkan Data Karyawan                                 ||\n";
-        cout << "||     3. Pengajuan Cuti                                          ||\n";
-        cout << "||     4. Hapus Data Karyawan                                     ||\n";
-        cout << "||     5. Undo Aksi                                               ||\n";
-        cout << "||     6. Tampilkan Antrian Cuti Karyawan                         ||\n";
-        cout << "||     0. Keluar                                                  ||\n";
-        cout << "====================================================================\n";
-        cout << "Pilih menu: ";
-        cin >> menu;
-
-        switch(menu){
-            case 1:
-                tambahDataKaryawan();
-                break;
-            case 2:
-                tampilkanDataKaryawan(root);
-                break;
-            case 3:
-                pengajuanCuti();
-                break;
-            case 4:
-                hapusDataKaryawan();
-                break;
-            case 5:
-                undoAksi();
-                break;
-            case 6:
-                tampilkanAntrianCuti();
-                break;
-            case 0:
-                cout << "Program Keluar\nData Telah Tersimpan" << endl;
-                return 0;
-            default:
-                cout << "Opsi menu tidak valid." << endl; 
-        }
-    } while(lanjut == "Y" || lanjut == "y");
 }
